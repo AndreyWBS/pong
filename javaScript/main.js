@@ -7,6 +7,7 @@ const tela = {
 
     comecox: 188,
     finalx: 1152,
+    veloPlay: 10
 
 
 }
@@ -17,8 +18,8 @@ var bola = {
     posicaoX: 0,
     posicaoY: 0,
 
-    velx: 10,
-    vely: 10
+    velx: 5,
+    vely: 5
 
 
 }
@@ -45,19 +46,24 @@ var player2 = {
 
 
 
-
-
-
-
-
-
-
-
-
-function reset() {
+function reset(teste) {
     bola.posicaoY = 250;
     bola.posicaoX = 482;
-    velo = 37;
+    tela.veloPlay = 10;
+
+    gerador = Math.floor(Math.random() * 10)
+    if (gerador < 5) {
+        gerador = gerador+3
+    }
+
+    if (teste) {
+        bola.velx = -gerador;
+        bola.vely = -gerador;
+    } else {
+        bola.velx = gerador;
+        bola.vely = gerador;
+    }
+
 
     bola.elemento.style = ` 
     top: ${250 + tela.comecoy}px;
@@ -68,14 +74,6 @@ function reset() {
 }
 
 reset()
-
-
-
-
-
-
-
-
 
 
 
@@ -110,24 +108,47 @@ function vrifTocou() {
     }
 
 
+
+
+
+    if (bola.posicaoX + tela.comecox > tela.finalx - 35 &
+        bola.posicaoY < player2.marginUp + 100 &
+        bola.posicaoY > player2.marginUp) {
+
+        tela.veloPlay = tela.veloPlay + 2
+        bola.velx = bola.velx + 5;
+        bola.velx = -bola.velx;
+    }
+
+
+    if (bola.posicaoX + tela.comecox < tela.comecox + 35 &
+        bola.posicaoY < player1.marginUp + 100 &
+        bola.posicaoY > player1.marginUp) {
+
+        tela.veloPlay = tela.veloPlay + 2
+        bola.velx = bola.velx - 5;
+        bola.velx = bola.velx * -1;
+
+    }
+
+
     if (bola.posicaoX + tela.comecox > tela.finalx) {
         //console.log("bateu no lado direito")
         bola.velx = -bola.velx;
-        reset()
+        reset(true)
     }
     if (bola.posicaoX + tela.comecox < tela.comecox) {
-        // console.log("lado esquerdo")
+       
         bola.velx = bola.velx * -1;
-        reset()
+        reset(false)
     }
-
-
-
 }
 
 function freme() {
+
+
     verificarjogador()
-    //bolinhandandO()
+    bolinhandandO()
 
 }
 
@@ -140,9 +161,9 @@ function comecar() {
 }
 
 function verificarjogador() {
-    if (player1.paracima & player1.marginUp != 0) {
-        player1.marginUp = player1.marginUp - 5
-        player1.marginDown = player1.marginDown + 5
+    if (player1.paracima & player1.marginUp > 0) {
+        player1.marginUp = player1.marginUp - tela.veloPlay
+        player1.marginDown = player1.marginDown + tela.veloPlay
 
         player1.elemento.style = `
             margin-top: ${player1.marginUp}px;
@@ -151,9 +172,9 @@ function verificarjogador() {
 
     }
 
-    if (player1.parabaixo & player1.marginDown != 0) {
-        player1.marginUp = player1.marginUp + 5
-        player1.marginDown = player1.marginDown - 5
+    if (player1.parabaixo & player1.marginDown > 0) {
+        player1.marginUp = player1.marginUp + tela.veloPlay
+        player1.marginDown = player1.marginDown - tela.veloPlay
 
         player1.elemento.style = `
             margin-top: ${player1.marginUp}px;
@@ -163,9 +184,9 @@ function verificarjogador() {
 
 
 
-    if (player2.paracima & player2.marginUp != 0) {
-        player2.marginUp = player2.marginUp - 5
-        player2.marginDown = player2.marginDown + 5
+    if (player2.paracima & player2.marginUp > 0) {
+        player2.marginUp = player2.marginUp - tela.veloPlay
+        player2.marginDown = player2.marginDown + tela.veloPlay
 
         player2.elemento.style = `
             margin-top: ${player2.marginUp}px;
@@ -174,9 +195,9 @@ function verificarjogador() {
 
     }
 
-    if (player2.parabaixo & player2.marginDown != 0) {
-        player2.marginUp = player2.marginUp + 5
-        player2.marginDown = player2.marginDown - 5
+    if (player2.parabaixo & player2.marginDown > 0) {
+        player2.marginUp = player2.marginUp + tela.veloPlay
+        player2.marginDown = player2.marginDown - tela.veloPlay
 
         player2.elemento.style = `
             margin-top: ${player2.marginUp}px;
@@ -213,7 +234,7 @@ tela.elemento.addEventListener("keydown", function (evento) {
         player2.parabaixo = true
 
     }
-    
+
 })
 
 
@@ -228,7 +249,7 @@ tela.elemento.addEventListener("keyup", function (evento) {
         player1.parabaixo = false
 
     }
-    
+
     if (evento.code == "ArrowUp") {
         player2.paracima = false
         player2.parabaixo = false
@@ -240,7 +261,4 @@ tela.elemento.addEventListener("keyup", function (evento) {
 
     }
 })
-
-
-
 

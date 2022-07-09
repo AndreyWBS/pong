@@ -58,7 +58,9 @@ footer {
 }
 
 
-
+div.placar{
+    position: absolute;
+}
 
 
 div.player {

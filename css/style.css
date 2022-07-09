@@ -57,16 +57,20 @@ footer{
 
 
 div.player {
-    height: 67px;
+    height: 70px;
     width: 25px;
     background-color: #fff;
 }
 div.play1{
     margin-left: 25px;
+    margin-top: 225px;
+    margin-bottom: 225px;
 }
 div.play2{
     
     margin-right: 25px;
+    margin-top: 225px;
+    margin-bottom: 225px;
 }
 
 
@@ -77,4 +81,17 @@ div.bola{
     background-color: rgb(255, 255, 255);
 
     position: absolute;
+    top: 51px;
+    bottom: auto;
+    left: 188px;
+    right: auto;
+
 }
+
+/*
+    começo y :51 px
+    final y : 551 px
+
+    começo x : 188 px
+    final x : 1152px
+*/

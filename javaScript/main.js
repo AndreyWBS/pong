@@ -33,7 +33,7 @@ var player1 = {
 }
 
 var player2 = {
-    elemento: document.getElementById("jog1"),
+    elemento: document.getElementById("jog2"),
     marginUp: 210,
     marginDown: 210,
 
@@ -140,7 +140,7 @@ function comecar() {
 }
 
 function verificarjogador() {
-    if (player1.paracima) {
+    if (player1.paracima & player1.marginUp != 0) {
         player1.marginUp = player1.marginUp - 5
         player1.marginDown = player1.marginDown + 5
 
@@ -151,7 +151,7 @@ function verificarjogador() {
 
     }
 
-    if (player1.parabaixo) {
+    if (player1.parabaixo & player1.marginDown != 0) {
         player1.marginUp = player1.marginUp + 5
         player1.marginDown = player1.marginDown - 5
 
@@ -163,18 +163,18 @@ function verificarjogador() {
 
 
 
-    if (player2.paracima) {
+    if (player2.paracima & player2.marginUp != 0) {
         player2.marginUp = player2.marginUp - 5
         player2.marginDown = player2.marginDown + 5
 
         player2.elemento.style = `
-            margin-top: ${player1.marginUp}px;
-            margin-bottom:  ${player1.marginDown}px;
+            margin-top: ${player2.marginUp}px;
+            margin-bottom:  ${player2.marginDown}px;
             `
 
     }
 
-    if (player2.parabaixo) {
+    if (player2.parabaixo & player2.marginDown != 0) {
         player2.marginUp = player2.marginUp + 5
         player2.marginDown = player2.marginDown - 5
 
@@ -202,6 +202,18 @@ tela.elemento.addEventListener("keydown", function (evento) {
         player1.parabaixo = true
 
     }
+
+    if (evento.code == "ArrowUp") {
+        player2.paracima = true
+        player2.parabaixo = false
+
+    }
+    if (evento.code == "ArrowDown") {
+        player2.paracima = false
+        player2.parabaixo = true
+
+    }
+    
 })
 
 
@@ -214,6 +226,17 @@ tela.elemento.addEventListener("keyup", function (evento) {
     if (evento.code == "KeyS") {
         player1.paracima = false
         player1.parabaixo = false
+
+    }
+    
+    if (evento.code == "ArrowUp") {
+        player2.paracima = false
+        player2.parabaixo = false
+
+    }
+    if (evento.code == "ArrowDown") {
+        player2.paracima = false
+        player2.parabaixo = false
 
     }
 })

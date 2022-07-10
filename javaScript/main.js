@@ -136,6 +136,7 @@ function vrifTocou() {
         //console.log("bateu no lado direito")
         bola.velx = -bola.velx;
         reset(true)
+        
     }
     if (bola.posicaoX + tela.comecox < tela.comecox) {
        

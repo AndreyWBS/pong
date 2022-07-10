@@ -2,7 +2,8 @@
     margin: 0px;
     border: 0px;
     padding: 0px;
-
+    font-family: 'Arvo', serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 div.container {
@@ -58,8 +59,24 @@ footer {
 }
 
 
-div.placar{
+div.placar {
     position: absolute;
+    top: 45px;
+    font-size: 50px;
+
+    color: #fff;
+
+    font-family: 'Arvo', serif;
+  
+
+}
+div#placarjog2{
+      
+    left: 700px;
+}
+div#placarjog1{
+      
+    left: 630px;
 }
 
 
